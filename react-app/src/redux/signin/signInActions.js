@@ -30,7 +30,7 @@ export const setPassword = (password = '') => {
     }
 }
 
-export const setUser = (user = string[{}]) => {
+export const setUser = (user = [{}]) => {
     return{
         type: SET_USER,
         payload: user 

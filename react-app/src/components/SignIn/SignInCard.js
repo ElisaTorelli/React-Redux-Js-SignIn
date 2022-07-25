@@ -1,10 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SET_USER } from '../../redux/signin/signInTypes'
 
 
 
 function SignInCard() {
+
+
+    // prevent default refresh
+    const handleRefresh = (e) => {
+        e.preventDefault()
+        console.log('submitted')
+    }
+
+
+
     // set field's state
     const [nameState, setName] = useState('')
     const [surnameState, setSurname] = useState('')
@@ -34,14 +44,14 @@ function SignInCard() {
     }
 
 
-    const handleSignIn = (e) => {
+    const handleSignIn = () => {
         // check if users's info are in array or not
         let userCheck = usersArray.find(
             (element) => 
-            element.name === usersArray.name && 
-            element.surname === usersArray.surname &&
-            element.email === usersArray.email && 
-            element.password === usersArray.password
+            element.name !== usersArray.name && 
+            element.surname !== usersArray.surname &&
+            element.email !== usersArray.email && 
+            element.password !== usersArray.password
             ) 
         if(userCheck){
             console.log('PUOI REGISTRARTI')
@@ -57,9 +67,9 @@ function SignInCard() {
         }else{
             console.log('NON PUOI')
         }
-        console.log(usersArray)
     }
 
+    console.log(handleSignIn())
 
     // useEffect(() => {
     //     console.log(usersArray)
