@@ -1,5 +1,4 @@
-import { SET_EMAIL, SET_NAME, SET_PASSWORD, SET_SURNAME } from "./signInTypes"
-
+import { SET_EMAIL, SET_NAME, SET_PASSWORD, SET_SURNAME, SET_USER_SIGN_IN } from "./signInTypes"
 
 
 
@@ -28,5 +27,13 @@ export const setPassword = (password = '') => {
     return{
         type: SET_PASSWORD,
         payload: password
+    }
+}
+
+
+export const setUserSignIn = (signIn = false) => {
+    return{
+        type: SET_USER_SIGN_IN,
+        payload: signIn
     }
 }

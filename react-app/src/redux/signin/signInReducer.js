@@ -1,5 +1,4 @@
-import { SET_EMAIL, SET_PASSWORD } from "./signInTypes"
-
+import { SET_EMAIL, SET_PASSWORD, SET_USER_SIGN_IN } from "./signInTypes"
 
 
 
@@ -13,7 +12,8 @@ const initialState ={
             email:"elisa@gmail.com",
             password:"ciaoElisa@!12"
         }
-    ]
+    ],
+    signIn: false
 }
 
 const signInReducer = (state = initialState, action) => {
@@ -27,6 +27,11 @@ const signInReducer = (state = initialState, action) => {
             return{
                 ...state,
                 password: state.usersArray.push(action.password)
+            }
+        case SET_USER_SIGN_IN:
+            return{
+                ...state,
+                signIn: action.payload
             }
         default: return state
     }
