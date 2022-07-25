@@ -1,7 +1,6 @@
-import React, { useState, useSelector } from 'react'
-import { connect } from 'react-redux'
-import {setEmail, setPassword} from 'redux'
-import { SET_EMAIL, SET_PASSWORD } from '../../redux/signin/signInTypes'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { SET_USER } from '../../redux/signin/signInTypes'
 
 
 
@@ -14,83 +13,57 @@ function SignInCard() {
 
 
 
-    const usersArray = useSelector( state => {
-        state.usersArray
-    })
-    
+    const usersArray = useSelector( state => state.usersArray)
+    const dispatch = useDispatch()
 
-    // const mapDispatchToProps = (dispatch, ownProp) => {
-    //     let userCheck = usersArray.find((element) => element.email !== usersArray.email && element.password !== usersArray.password) 
-    //     if(userCheck){
-    //         return {
-    //             console.log(usersArray)
-    //         }
-    //     }else{
-    //         console.log('non puoi registrarti')
-    //     }
-    //     const dispatchFunction = ownProp.email
-    //     ? () => dispatch (setEmail)
-    //     : () => dispatch (setPassword)
-    //     return{
-    //         userInfo: dispatchFunction()
-    //     }
-    // }
-
-
-
+    //functions to change initial value state
     const handleNameChange = (event) =>{
-        setName({
-            ...nameState,
-            name: event.nameState.name
-                
-        })
+        setName(event?.target?.value)
     }
-    
 
     const handleSurnameChange = (event) =>{
-        setSurname({
-            ...surnameState,
-            surname: event.surnameState.surname
-            
-        })
+        setSurname(event?.target?.value)
     }
 
-
     const handleEmailChange = (event) =>{
-        setEmail({
-            ...emailState,
-            email: event.emailState.email
-            
-        })
+        setEmail(event?.target?.value)
     }
 
     const handlePasswordChange = (event) =>{
-        setPassword({
-            ...passwordState,
-            password: event.passwordState.password
-            
-        })
+        setPassword(event?.target?.value)
     }
 
 
     const handleSignIn = () => {
         // check if users's info are in array or not
-        let userCheck = usersArray.find((element) => element.email !== usersArray.email && element.password !== usersArray.password) 
-        if(userCheck){
-            // user not sign up
+        let userCheck = usersArray.find(
+            (element) => 
+            element.name === usersArray.name && 
+            element.surname === usersArray.surname &&
+            element.email === usersArray.email && 
+            element.password === usersArray.password
+            ) 
+        if(!userCheck){
+            console.log('PUOI REGISTRARTI')
+            dispatch({
+                type: SET_USER,
+                payload: {
+                    name: nameState,
+                    surname: surnameState,
+                    email: emailState,
+                    password: passwordState
+                }
+            })
+        }else{
+            console.log('NON PUOI')
         }
+        console.log(usersArray)
     }
 
 
-    // const mapStateToProps = (state, ownProp) => {
-    //     const userState = ownProp.email
-    //     ? state.emailState.email
-    //     : state.passwordState.password
-    //     return{
-    //         user: userState
-    //     }
-    // }
-
+    // useEffect(() => {
+    //     console.log(usersArray)
+    // })
 
 
 return (
@@ -104,7 +77,4 @@ return (
 )
 }
 
-export default connect(
-    // mapStateToProps, 
-    // mapDispatchToProps
-) (SignInCard)
+export default SignInCard
