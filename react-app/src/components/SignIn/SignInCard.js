@@ -34,7 +34,7 @@ function SignInCard() {
     }
 
 
-    const handleSignIn = () => {
+    const handleSignIn = (e) => {
         // check if users's info are in array or not
         let userCheck = usersArray.find(
             (element) => 
@@ -43,7 +43,7 @@ function SignInCard() {
             element.email === usersArray.email && 
             element.password === usersArray.password
             ) 
-        if(!userCheck){
+        if(userCheck){
             console.log('PUOI REGISTRARTI')
             dispatch({
                 type: SET_USER,
