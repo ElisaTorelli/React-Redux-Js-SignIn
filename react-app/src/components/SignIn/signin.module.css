@@ -1,3 +1,11 @@
+/* INDEX:
+    1.GENERAL SETTINGS
+    2.MAIN CONTAINER
+        a)InputForm
+
+
+*/
+
 /* GENERAL SETTINGS */
 *{
     box-sizing: border-box;
@@ -7,45 +15,38 @@
     padding: 0;
 }
 
-h2{
+/* MAIN CONTAINER */
+.signInCardContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+/* InputForm */
+.inputContainer{
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin: 0 auto;
     margin-top: 40px;
 }
 
-h4{
-    display: none;
+h3{
+    margin-top: 70px;
 }
 
-.SignIncardContainer{
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    margin: 0 auto;
-    margin-top: 130px;
-}
-
-.btnContainer{
-    display: flex;
-    justify-content: space-around;
-    margin-top: 24px;
-}
-
-/* Display error message */
 input{
-    border: 1px solid rgb(158, 155, 155);
+    border: none;
+    margin: 16px;
 }
 
-
-/* invalid password & email input */
-.passwordInput:invalid:focus{
-    background-color: #f5b0b0;
+button{
+    width: 100px;
+    height: 30px;
+    margin-top: 30px;
+    margin-left: 70px;
 }
-
-.emailInput:invalid{
-    background-color: #f5b0b0;
-}
-
-
-/* valid inputs */
-input:valid {
-    background-color: #ffffff;
+button:hover{
+    background-color: rgba(125, 133, 133, 0.516);
+    border: 1px solid rgba(125, 133, 133, 0.516);
 }

@@ -84,13 +84,14 @@ function SignInCard() {
 
 
     return (
-        <div className={styles.SignIncardContainer}>
-            <input className={styles.nameInput} type='text' placeholder='name..' onChange={handleNameChange}/>
-            <input className={styles.surnameInput} type='text' placeholder='surname..' onChange={handleSurnameChange}/>
-            <input className={styles.emailInput} type='email' placeholder='email..' onChange={handleEmailChange}/>
-            <input required minLength={8} title="Password must contain at least one number, one uppercase and lowercase letter and  at least 8 characters" className={styles.passwordInput} type='password' placeholder='password..' onChange={handlePasswordChange}/>
-            <div>
-                <button type='button' onClick=  {handleSignIn}>Sign In</button>
+        <div className={styles.signInCardContainer}>
+            <h3>Insert your credentials to sign-in:</h3>
+            <div className={styles.inputContainer}>
+                <input className={styles.nameInput} type='text' placeholder='name..' onChange={handleNameChange} />
+                <input className={styles.surnameInput} type='text' placeholder='surname..' onChange={handleSurnameChange} />
+                <input className={styles.emailInput} type='email' placeholder='email..' onChange={handleEmailChange} />
+                <input required minLength={8} title="Password must contain one number, one uppercase and lowercase letter & at least 8  characters" className={styles.passwordInput} type='password' placeholder='password..' onChange={handlePasswordChange} />
+                <button type='button' onClick={handleSignIn} >Sign In</button>
             </div>
         </div>
     )
