@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { SET_USER } from '../../redux/signin/signInTypes'
+import { SET_USER, USERS_ARRAY_RESULT } from '../../redux/signin/signInTypes'
 import styles from '../SignIn/signin.module.css'
 
 
@@ -13,9 +13,8 @@ function SignInCard() {
     const [passwordState, setPasswordState] = useState('')
 
     // React-Redux Hooks
-    const usersArray = useSelector( state => state.usersArray)
+    const usersArray = useSelector( store => store.usersArray)
     const dispatch = useDispatch()
-
 
 
     // check if email & password are valid
@@ -83,6 +82,14 @@ function SignInCard() {
     }
 
 
+    const getUsersArrayList = () => {
+        dispatch({
+            type: USERS_ARRAY_RESULT,
+            payload: usersArray
+        })
+    }
+
+
     return (
         <div className={styles.signInCardContainer}>
             <h3>Insert your credentials to sign-in:</h3>
@@ -91,7 +98,7 @@ function SignInCard() {
                 <input className={styles.surnameInput} type='text' placeholder='surname..' onChange={handleSurnameChange} />
                 <input className={styles.emailInput} type='email' placeholder='email..' onChange={handleEmailChange} />
                 <input required minLength={8} title="Password must contain one number, one uppercase and lowercase letter & at least 8  characters" className={styles.passwordInput} type='password' placeholder='password..' onChange={handlePasswordChange} />
-                <button type='button' onClick={handleSignIn} >Sign In</button>
+                <button type='button' onClick={(handleSignIn) (getUsersArrayList)} >Sign In</button>
             </div>
         </div>
     )

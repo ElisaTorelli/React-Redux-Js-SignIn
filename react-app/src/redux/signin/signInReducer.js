@@ -1,23 +1,12 @@
-import { SET_USER  } from "./signInTypes"
+import usersArray from "../usersArray"
+import { SET_USER, USERS_ARRAY_RESULT  } from "./signInTypes"
 
 
-const initialState ={
-    usersArray: [
-        {
-            name: 'Marika',
-            surname: 'Morittu',
-            email: "marika@gmail.com",
-            password:"ciaoMarika@!12"
-        },
-        {
-            name: 'Elisa',
-            surname: 'Torelli',
-            email:"elisa@gmail.com",
-            password:"ciaoElisa@!12"
-        }
-    ],
+const initialState = {
+    user: usersArray,
     signIn: false
 }
+
 
 const signInReducer = (state = initialState, action) => {
     switch(action.type) {
@@ -26,6 +15,11 @@ const signInReducer = (state = initialState, action) => {
                 ...state,
                 usersArray: [...state.usersArray, action.payload],
                 signIn: true
+            }
+        case USERS_ARRAY_RESULT:
+            return{
+                ...state,
+                user: action.payload
             }
         default: return state
     }
