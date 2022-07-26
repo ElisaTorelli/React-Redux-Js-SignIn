@@ -1,4 +1,4 @@
-import { SET_EMAIL, SET_NAME, SET_PASSWORD, SET_SURNAME, SET_USER } from "./signInTypes"
+import { SET_EMAIL, SET_NAME, SET_PASSWORD, SET_SURNAME, SET_USER  } from "./signInTypes"
 
 
 

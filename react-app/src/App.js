@@ -4,12 +4,13 @@ import SignInCard from './components/SignIn/SignInCard'
 
 
 function App() {
-  const {signin} = useSelector((store) => store)
 
+  // const {signin} = useSelector((store) => store)
   
   return (
     <div className="App">
-      <SignInCard /> 
+      {/* {signin ? <p>Sei registrato</p> : <SignInCard /> } */}
+      <SignInCard />
     </div>
   );
 }

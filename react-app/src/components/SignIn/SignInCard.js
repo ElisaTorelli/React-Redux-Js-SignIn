@@ -5,56 +5,49 @@ import { SET_USER } from '../../redux/signin/signInTypes'
 
 
 function SignInCard() {
-
-
-    // prevent default refresh
-    const handleRefresh = (e) => {
-        e.preventDefault()
-        console.log('submitted')
-    }
-
-
-
     // set field's state
-    const [nameState, setName] = useState('')
-    const [surnameState, setSurname] = useState('')
-    const [emailState, setEmail] = useState('')
-    const [passwordState, setPassword] = useState('')
+    const [nameState, setNameState] = useState('')
+    const [surnameState, setSurnameState] = useState('')
+    const [emailState, setEmailState] = useState('')
+    const [passwordState, setPasswordState] = useState('')
 
-
-
+    // React-Redux Hooks
     const usersArray = useSelector( state => state.usersArray)
     const dispatch = useDispatch()
 
-    //functions to change initial value state
+
+    //functions to change initial value state for each input form
     const handleNameChange = (event) =>{
-        setName(event?.target?.value)
+        setNameState(event?.target?.value)
     }
 
     const handleSurnameChange = (event) =>{
-        setSurname(event?.target?.value)
+        setSurnameState(event?.target?.value)
     }
 
     const handleEmailChange = (event) =>{
-        setEmail(event?.target?.value)
+        setEmailState(event?.target?.value)
     }
 
     const handlePasswordChange = (event) =>{
-        setPassword(event?.target?.value)
+        setPasswordState(event?.target?.value)
     }
 
 
+    // set condition to check if user is in array
+    let userIsPresentInArray = usersArray.find(
+        (element) => 
+        element.name === nameState && 
+        element.surname === surnameState &&
+        element.email === emailState && 
+        element.password === passwordState
+        )
+
+
+    // sign-in function
     const handleSignIn = () => {
-        // check if users's info are in array or not
-        let userCheck = usersArray.find(
-            (element) => 
-            element.name !== usersArray.name && 
-            element.surname !== usersArray.surname &&
-            element.email !== usersArray.email && 
-            element.password !== usersArray.password
-            ) 
-        if(userCheck){
-            console.log('PUOI REGISTRARTI')
+        // check if 'userIsPresentInArray' is true / false
+        if(!userIsPresentInArray){
             dispatch({
                 type: SET_USER,
                 payload: {
@@ -64,27 +57,20 @@ function SignInCard() {
                     password: passwordState
                 }
             })
-        }else{
-            console.log('NON PUOI')
+            console.log(usersArray)
         }
     }
 
-    console.log(handleSignIn())
 
-    // useEffect(() => {
-    //     console.log(usersArray)
-    // })
-
-
-return (
-    <div>
-        <input type='text' placeholder='name..' onChange={handleNameChange}/>
-        <input type='text' placeholder='surname..' onChange={handleSurnameChange}/>
-        <input type='email' placeholder='email..' onChange={handleEmailChange}/>
-        <input type='password' placeholder='password..' onChange={handlePasswordChange}/>
-        <button onClick={handleSignIn}>Sign In</button>
-    </div>
-)
+    return (
+        <div>
+            <input type='text' placeholder='name..' onChange={handleNameChange}/>
+            <input type='text' placeholder='surname..' onChange={handleSurnameChange}/>
+            <input type='email' placeholder='email..' onChange={handleEmailChange}/>
+            <input type='password' placeholder='password..' onChange={handlePasswordChange}/>
+            <button type='button' onClick={handleSignIn}>Sign In</button>
+        </div>
+    )
 }
 
 export default SignInCard

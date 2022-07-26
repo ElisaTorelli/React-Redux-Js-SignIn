@@ -1,5 +1,4 @@
-import { SET_USER } from "./signInTypes"
-
+import { SET_USER  } from "./signInTypes"
 
 
 const initialState ={
