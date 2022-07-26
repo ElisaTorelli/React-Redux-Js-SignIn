@@ -11,8 +11,8 @@ function App() {
   return (
     <div className="App">
       {/* {signin ? <p>Sei registrato</p> : <SignInCard /> } */}
-      {/* <SignInCard /> */}
-      <LogInCard />
+      <SignInCard />
+      {/* <LogInCard /> */}
     </div>
   );
 }
