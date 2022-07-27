@@ -79,9 +79,10 @@ function SignInCard() {
                 }
             })
             console.log(store.getState(usersArray))
+        }else{
+            console.log(store.getState(usersArray))
         }
     }
-
 
 
 
