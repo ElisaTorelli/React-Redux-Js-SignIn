@@ -19,7 +19,7 @@ const signInReducer = (state = initialState, action) => {
             return{
                 ...state,
                 // push usersArray in [users]
-                users: [...state.users, ...action.payload],
+                users: [...action.payload],
             }
         default: return state
     }
