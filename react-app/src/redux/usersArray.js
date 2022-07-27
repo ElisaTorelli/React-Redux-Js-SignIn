@@ -14,4 +14,4 @@ const usersArray = [
 ]
 
 
-    export default usersArray
+export default usersArray

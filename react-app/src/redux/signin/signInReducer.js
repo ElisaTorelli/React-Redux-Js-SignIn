@@ -2,7 +2,8 @@ import { GET_USERS, SET_USER} from "./signInTypes"
 
 
 const initialState = {
-    users: []
+    users: [],
+    loading: false
 }
 
 
@@ -12,11 +13,13 @@ const signInReducer = (state = initialState, action) => {
             return{
                 ...state,
                 users: [...state.users, action.payload],
+                loading: true
             }
         case GET_USERS:
             return{
                 ...state,
                 users: [...state.users, ...action.payload],
+                loading: true
             }
         
         default: return state
@@ -24,5 +27,3 @@ const signInReducer = (state = initialState, action) => {
 }
 
 export default signInReducer
-
-
