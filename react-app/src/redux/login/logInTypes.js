@@ -1,0 +1,3 @@
+export const CHECK_USER_REGISTRETED = 'CHECK_USER_REGISTRETED'
+export const GET_USERS = 'GET_USERS'
+

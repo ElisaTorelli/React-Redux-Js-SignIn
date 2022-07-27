@@ -1,8 +1,8 @@
 import { createStore } from 'redux'
-import signInReducer from './signin/signInReducer'
+import rootReducer from './rootReducer'
 
 
-const store = createStore(signInReducer)
+const store = createStore(rootReducer)
 
 
 export default store
