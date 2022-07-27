@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { getUser, setUser } from '../../redux/signin/signInActions'
 import { GET_USERS, SET_USER } from '../../redux/signin/signInTypes'
 import usersArray from '../../redux/usersArray'
 import styles from '../SignIn/signin.module.css'
@@ -13,7 +14,7 @@ function SignInCard() {
     const [passwordState, setPasswordState] = useState('')
 
     // React-Redux Hooks
-    const users = useSelector( store => store.users)
+    const users = useSelector(state => state.users)
     const dispatch = useDispatch()
 
 
@@ -68,29 +69,35 @@ function SignInCard() {
     const handleSignIn = () => {
         // check if 'userIsPresentInArray' is true / false
         if(!userIsPresentInArray){
-            dispatch({
-                type: SET_USER,
-                payload: {
+            dispatch( setUser({
                     name: nameState,
                     surname: surnameState,
                     email: emailState,
                     password: passwordState
-                },
-                loading: true
-            })
+                })
+            //     {
+            //     type: SET_USER,
+            //     payload: {
+            //         name: nameState,
+            //         surname: surnameState,
+            //         email: emailState,
+            //         password: passwordState
+            //     }
+            // }
+            )
         }
         console.log(usersArray)
     }
 
 
-    const getUsersList = () => {
-        dispatch({
-            type:GET_USERS,
-            payload:users,
-            loading: true
-        })
-        console.log(users)
-    }
+    useEffect (()=>{
+        dispatch(getUser())
+    },[])
+    
+
+    // useEffect(()=>{
+    //     console.log(users)
+    // },[users])
 
     return (
         <div className={styles.signInCardContainer}>
