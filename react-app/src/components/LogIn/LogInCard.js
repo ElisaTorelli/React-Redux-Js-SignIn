@@ -4,6 +4,7 @@ import styles from '../LogIn/login.module.css'
 import { checkUserRegistreted, getUser } from '../../redux/login/logInActions'
 
 
+
 const LogInCard = () => {
     // set field's state
     const [emailState, setEmailState] = useState('')
@@ -36,12 +37,12 @@ const LogInCard = () => {
 
     const handleLogIn = () => {
         // if(checkLoginUsers){
-            dispatch(
-                checkUserRegistreted({
-                    email: emailState,
-                    password: passwordState
-                })
-            )
+                dispatch(
+                    checkUserRegistreted({
+                        email: emailState,
+                        password: passwordState
+                    })
+                )
         // }else{
         //     console.log('Non puoi entrare')
         // }

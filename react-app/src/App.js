@@ -6,10 +6,10 @@ import LogInCard from './components/LogIn/LogInCard';
 
 function App() {
   return (
-    <div className="App">
-      {/* <SignInCard /> */}
-      <LogInCard />
-    </div>
+      <div className="App">
+        <SignInCard />
+        {/* <LogInCard /> */}
+      </div>
   );
 }
 
