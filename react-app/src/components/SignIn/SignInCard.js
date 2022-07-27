@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUser, setUser } from '../../redux/signin/signInActions'
-import { GET_USERS, SET_USER } from '../../redux/signin/signInTypes'
-import usersArray from '../../redux/usersArray'
 import styles from '../SignIn/signin.module.css'
 
 
@@ -86,10 +84,11 @@ function SignInCard() {
             // }
             )
         }
-        console.log(usersArray)
+        console.log(users)
     }
 
 
+    // send getUser action --> it select users array & push it in [users]
     useEffect (()=>{
         dispatch(getUser())
     },[])
@@ -99,6 +98,7 @@ function SignInCard() {
     //     console.log(users)
     // },[users])
 
+    
     return (
         <div className={styles.signInCardContainer}>
             <h3>Insert your credentials to sign-in:</h3>
@@ -108,7 +108,6 @@ function SignInCard() {
                 <input className={styles.emailInput} type='email' placeholder='email..' onChange={handleEmailChange} />
                 <input required minLength={8} title="Password must contain one number, one uppercase and lowercase letter & at least 8  characters" className={styles.passwordInput} type='password' placeholder='password..' onChange={handlePasswordChange} />
                 <button type='button' onClick={handleSignIn} >Sign In</button>
-                <button type='button' onClick={getUsersList} >Prova</button>
             </div>
         </div>
     )
