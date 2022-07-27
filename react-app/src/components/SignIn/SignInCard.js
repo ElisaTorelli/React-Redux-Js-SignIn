@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { SET_USER } from '../../redux/signin/signInTypes'
+import { GET_USERS, SET_USER } from '../../redux/signin/signInTypes'
 import styles from '../SignIn/signin.module.css'
-import store from '../../redux/store'
-
 
 
 function SignInCard() {
@@ -14,7 +12,7 @@ function SignInCard() {
     const [passwordState, setPasswordState] = useState('')
 
     // React-Redux Hooks
-    const usersArray = useSelector( store => store.usersArray)
+    const users = useSelector( store => store.users)
     const dispatch = useDispatch()
 
 
@@ -40,9 +38,9 @@ function SignInCard() {
 
     const handleEmailChange = (event) =>{
         if(!validEmail(event?.target?.value)){
-            console.log('password NO')
+            console.log('email NO')
         }else{
-            console.log('password SI')
+            console.log('email SI')
             setEmailState(event?.target?.value)
         }
     }
@@ -58,7 +56,7 @@ function SignInCard() {
 
 
     // set condition to check if user is in array
-    let userIsPresentInArray = usersArray.find(
+    let userIsPresentInArray = users.find(
         (element) => 
         element.email === emailState && 
         element.password === passwordState
@@ -78,11 +76,16 @@ function SignInCard() {
                     password: passwordState
                 }
             })
-            console.log(store.getState(usersArray))
         }
     }
 
 
+    const getUsersList = () => {
+        dispatch({
+            type:GET_USERS,
+            payload:users
+        })
+    }
 
 
     return (
