@@ -1,5 +1,5 @@
 // import { SET_EMAIL, SET_NAME, SET_PASSWORD, SET_SURNAME, SET_USER  } from "./signInTypes"
-import { SET_USER, USERS_ARRAY_RESULT  } from "./signInTypes"
+import { SET_USER } from "./signInTypes"
 
 
 
@@ -34,14 +34,6 @@ import { SET_USER, USERS_ARRAY_RESULT  } from "./signInTypes"
 export const setUser = (user = [{}]) => {
     return{
         type: SET_USER,
-        payload: user 
-    }
-}
-
-
-export const usersArrayResult = (user) => {
-    return{
-        type: USERS_ARRAY_RESULT,
         payload: user 
     }
 }

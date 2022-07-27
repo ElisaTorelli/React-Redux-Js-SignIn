@@ -1,10 +1,9 @@
 import usersArray from "../usersArray"
-import { SET_USER, USERS_ARRAY_RESULT  } from "./signInTypes"
+import { SET_USER} from "./signInTypes"
 
 
 const initialState = {
-    user: usersArray,
-    signIn: false
+    usersArray
 }
 
 
@@ -14,12 +13,6 @@ const signInReducer = (state = initialState, action) => {
             return{
                 ...state,
                 usersArray: [...state.usersArray, action.payload],
-                signIn: true
-            }
-        case USERS_ARRAY_RESULT:
-            return{
-                ...state,
-                user: action.payload
             }
         default: return state
     }

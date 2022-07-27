@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { SET_USER, USERS_ARRAY_RESULT } from '../../redux/signin/signInTypes'
+import { SET_USER } from '../../redux/signin/signInTypes'
 import styles from '../SignIn/signin.module.css'
+import store from '../../redux/store'
 
 
 
@@ -77,17 +78,11 @@ function SignInCard() {
                     password: passwordState
                 }
             })
-            console.log(usersArray)
+            console.log(store.getState(usersArray))
         }
     }
 
 
-    const getUsersArrayList = () => {
-        dispatch({
-            type: USERS_ARRAY_RESULT,
-            payload: usersArray
-        })
-    }
 
 
     return (
@@ -98,7 +93,7 @@ function SignInCard() {
                 <input className={styles.surnameInput} type='text' placeholder='surname..' onChange={handleSurnameChange} />
                 <input className={styles.emailInput} type='email' placeholder='email..' onChange={handleEmailChange} />
                 <input required minLength={8} title="Password must contain one number, one uppercase and lowercase letter & at least 8  characters" className={styles.passwordInput} type='password' placeholder='password..' onChange={handlePasswordChange} />
-                <button type='button' onClick={(handleSignIn) (getUsersArrayList)} >Sign In</button>
+                <button type='button' onClick={handleSignIn} >Sign In</button>
             </div>
         </div>
     )
