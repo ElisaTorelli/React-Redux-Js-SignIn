@@ -12,7 +12,7 @@ function SignInCard() {
     const [passwordState, setPasswordState] = useState('')
 
     // React-Redux Hooks
-    const users = useSelector(state => state.users)
+    const users = useSelector(store => store.signin.users)
     const dispatch = useDispatch()
 
 
@@ -56,7 +56,7 @@ function SignInCard() {
 
 
     // set condition to check if user is in array
-    let userIsPresentInArray = users.find(
+    let userIsPresentInArray = () => users.find(
         (element) => 
         element.email === emailState && 
         element.password === passwordState
@@ -66,7 +66,7 @@ function SignInCard() {
     // sign-in function
     const handleSignIn = () => {
         // check if 'userIsPresentInArray' is true / false
-        if(!userIsPresentInArray){
+        if(!userIsPresentInArray()){
             dispatch( setUser({
                     name: nameState,
                     surname: surnameState,
@@ -94,9 +94,9 @@ function SignInCard() {
     },[])
     
 
-    // useEffect(()=>{
-    //     console.log(users)
-    // },[users])
+     /*useEffect(()=>{
+         console.log(users)
+     },[users])*/
 
     
     return (
