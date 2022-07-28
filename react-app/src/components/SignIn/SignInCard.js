@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUser, setIsButtonIsAbled, setUser, setIsButtonDisabled } from '../../redux/signin/signInActions'
 import styles from '../SignIn/signin.module.css'
-
-import {Link} from 'react-router-dom'
-import ToDo from '../../pages/ToDo'
+import {useNavigate} from 'react-router-dom'
 
 
 
@@ -15,7 +13,6 @@ function SignInCard() {
     const [surnameState, setSurnameState] = useState('')
     const [emailState, setEmailState] = useState('')
     const [passwordState, setPasswordState] = useState('')
-    const [errorMessageState, setErrorMessageState] = useState('')
 
 
 
@@ -23,6 +20,7 @@ function SignInCard() {
     const users = useSelector(store => store.signin.users)
     const button= useSelector((state)=> state.signin.isButtonDisabled)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
 
     // disable SignIn btn
@@ -76,17 +74,6 @@ function SignInCard() {
     }
 
 
-    // function to set error message
-    // useEffect ((e) => {
-    //     if(!validPassword(e.target.value)){
-    //         setErrorState('Password sbagliata!')
-    //     }else if(!validEmail(e.target.value)){
-    //         setErrorState('Email sbagliata!')
-    //     }
-    // }, [])
-
-
-
 
     // set condition to check if user is in array
     let userIsPresentInArray = () => users.find(
@@ -118,10 +105,9 @@ function SignInCard() {
             // }
             )
             console.log(users)
+            navigate('/login')
         }
-        // else{
-        //     setErrorMessageState('Email not valid')
-        // }
+        
     }
 
 
@@ -138,23 +124,7 @@ function SignInCard() {
             button || handleSignIn()
         }
     }
-
-
-    // function to dispatch error action
-    // const dispatchError = () => {
-    //     dispatch(
-    //         setIsError(errorState)
-    //     )
-    //     console.log(errorState)
-    // }
-
-
-    //function to display error message
-    // const displayErrorMessage = () => {
-    //     setErrorMessageState('Email not valid');
-    // } 
-
-
+    
 
     return (
         <div className={styles.signInCardContainer}>
@@ -164,10 +134,7 @@ function SignInCard() {
                 <input className={styles.surnameInput} required maxLength={12} type='text' placeholder='surname..' onChange={handleSurnameChange} onKeyPress={handleKeyPress} />
                 <input className={styles.emailInput} type='email' placeholder='email..' onChange={handleEmailChange} onKeyPress={handleKeyPress}/>
                 <input required minLength={8} title="Password must contain one number, one uppercase and lowercase letter & at least 8  characters" className={styles.passwordInput} type='password' placeholder='password..' onChange={handlePasswordChange} onKeyPress={handleKeyPress} />
-                {/* {handleSignIn && (
-                    <p className={styles.errorMessage}>{errorMessageState}</p>
-                )} */}
-                <Link to='/todo' title="redirect"><button type='button' onClick={ (handleSignIn) } disabled={button}>Sign In</button></Link>
+                <button type='button' onClick={ (handleSignIn) } disabled={button}>Sign In</button>
             </div>
         </div>
     )
