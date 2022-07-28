@@ -4,6 +4,10 @@ import styles from '../LogIn/login.module.css'
 import { checkUserRegistreted, getUser, setIsButtonDisabled, setIsButtonIsabled } from '../../redux/login/logInActions'
 
 
+import { Link } from 'react-router-dom'
+
+
+
 const LogInCard = () => {
     // set field's state
     const [emailState, setEmailState] = useState('')
@@ -38,6 +42,7 @@ const LogInCard = () => {
 
     // log-in function
     const handleLogIn = () => {
+
         if(checkLoginUsers()){
             dispatch(
                 checkUserRegistreted()

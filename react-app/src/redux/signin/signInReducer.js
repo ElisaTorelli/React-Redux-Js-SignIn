@@ -1,9 +1,10 @@
-import { GET_USERS, SET_USER} from "./signInTypes"
+import { GET_USERS, SET_USER, SET_IS_BUTTON_DISABLED} from "./signInTypes"
 
 
 // set initial state
 const initialState = {
-    users: []
+    users: [],
+    isButtonDisabled: true
 }
 
 
@@ -20,6 +21,11 @@ const signInReducer = (state = initialState, action) => {
                 ...state,
                 // push usersArray in [users]
                 users: [...action.payload],
+            }
+        case SET_IS_BUTTON_DISABLED:
+            return{
+                ...state,
+                isButtonDisabled: action.payload
             }
         default: return state
     }
