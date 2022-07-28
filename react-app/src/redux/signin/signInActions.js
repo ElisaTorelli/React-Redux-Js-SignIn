@@ -1,4 +1,4 @@
-import { GET_USERS, SET_USER, SET_IS_BUTTON_DISABLED, SET_IS_BUTTON_IS_ABLED, SET_IS_ERROR } from "./signInTypes"
+import { GET_USERS, SET_USER, SET_IS_BUTTON_DISABLED, SET_IS_BUTTON_IS_ABLED} from "./signInTypes"
 import usersArray from '../usersArray'
 
 
