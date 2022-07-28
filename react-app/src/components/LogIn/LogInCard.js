@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from '../LogIn/login.module.css'
-import { checkUserRegistreted, getUser, setIsButtonDisabled, setIsButtonIsabled } from '../../redux/login/logInActions'
+import { checkUserRegistreted, getUser, setIsButtonDisabled, setIsButtonIsabled, setIsError } from '../../redux/login/logInActions'
 
 
 import { Link } from 'react-router-dom'
@@ -35,11 +35,12 @@ const LogInCard = () => {
 
 
     // set condition to check if user is in array
-    let checkLoginUsers = () => users.find(
+    let checkLoginUsers = () => {users.find(
         (element) => 
         element.email === emailState && 
         element.password === passwordState
     )
+}
 
 
     // log-in function
@@ -47,13 +48,15 @@ const LogInCard = () => {
 
         if(checkLoginUsers()){
             dispatch(
-                checkUserRegistreted()
+                checkUserRegistreted(),
             )
+            // bottone = ( <BottoneLogin onClick={this.handleLoginClick} /> )
             console.log('Sei entrato !')
         }else{
+            dispatch(setIsError())
+            setErrorMessageState('email sbagliata!')
             console.log('Non puoi entrare')
         }
-        setErrorMessageState('Email not valid')
     }
 
 
@@ -89,9 +92,10 @@ const LogInCard = () => {
             <div className={styles.inputContainer}>
                 <input className={styles.emailInput} type='email' placeholder='email..' onKeyPress={handleKeyPress} onChange={handleEmailChange} />
                 <input required minLength={8} title="Password must contain one number, one uppercase and lowercase letter & at least 8  characters" onKeyPress={handleKeyPress} className={styles.passwordInput} type='password' placeholder='password..' onChange={handlePasswordChange} />
-                {handleLogIn && (
+                {/* {handleLogIn && (
                     <p className={styles.errorMessage}>{errorMessageState}</p>
-                )}
+                )} */}
+                <div className={styles.error}>{errorMessageState}</div>
                 {/* <Link to='/todo' title="redirect"> */}
                 <button type='button' onClick={handleLogIn} disabled={button}>Log In</button>
                 {/* </Link> */}

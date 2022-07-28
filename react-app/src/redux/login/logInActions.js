@@ -1,4 +1,4 @@
-import { CHECK_USER_REGISTRETED, GET_USERS, SET_IS_BUTTON_DISABLED,SET_IS_BUTTON_IS_ABLED} from "./logInTypes"
+import { CHECK_USER_REGISTRETED, GET_USERS, SET_IS_BUTTON_DISABLED,SET_IS_BUTTON_IS_ABLED, SET_IS_ERROR} from "./logInTypes"
 import usersArray from '../usersArray'
 
 
@@ -28,6 +28,13 @@ export const setIsButtonDisabled = () => {
 export const setIsButtonIsabled = () => {
     return{
         type: SET_IS_BUTTON_IS_ABLED,
+        payload: true
+    }
+}
+
+export const setIsError = () => {
+    return{
+        type: SET_IS_ERROR,
         payload: true
     }
 }
