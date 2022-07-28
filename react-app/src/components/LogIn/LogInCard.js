@@ -4,6 +4,9 @@ import styles from '../LogIn/login.module.css'
 import { checkUserRegistreted, getUser } from '../../redux/login/logInActions'
 
 
+import { Link } from 'react-router-dom'
+
+
 
 const LogInCard = () => {
     // set field's state
@@ -62,7 +65,7 @@ const LogInCard = () => {
             <div className={styles.inputContainer}>
                 <input className={styles.emailInput} type='email' placeholder='email..' onChange={handleEmailChange} />
                 <input required minLength={8} title="Password must contain one number, one uppercase and lowercase letter & at least 8  characters" className={styles.passwordInput} type='password' placeholder='password..' onChange={handlePasswordChange} />
-                <button type='button' onClick={handleLogIn}>Log In</button>
+                <Link to='/todo' title="redirect"><button type='button' onClick={handleLogIn}>Log In</button></Link>
             </div>
         </div>
     )

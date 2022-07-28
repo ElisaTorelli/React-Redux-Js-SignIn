@@ -4,9 +4,13 @@ import { getUser, setUser } from '../../redux/signin/signInActions'
 import styles from '../SignIn/signin.module.css'
 
 
+import {Link} from 'react-router-dom'
+import { SET_IS_BUTTON_DISABLED } from '../../redux/signin/signInTypes'
+
 
 
 function SignInCard() {
+
     // set field's state
     const [nameState, setNameState] = useState('')
     const [surnameState, setSurnameState] = useState('')
@@ -16,6 +20,22 @@ function SignInCard() {
     // React-Redux Hooks
     const users = useSelector(store => store.signin.users)
     const dispatch = useDispatch()
+
+
+    // disable SignIn btn
+    // useEffect(() => {
+    //     if(nameState?.trim() && surnameState?.trim() && emailState.trim() && passwordState.trim()){
+    //         dispatch({
+    //             type: SET_IS_BUTTON_DISABLED,
+    //             payload: false
+    //         })
+    //     }else{
+    //         dispatch({
+    //             type: SET_IS_BUTTON_DISABLED,
+    //             payload: true
+    //         })
+    //     }
+    // }, [emailState, passwordState])
 
 
     // check if email & password are valid
@@ -96,9 +116,27 @@ function SignInCard() {
     },[])
     
 
-     /*useEffect(()=>{
-         console.log(users)
-     },[users])*/
+    /*useEffect(()=>{
+        console.log(users)
+    },[users])*/
+
+
+
+    //make btn available after validations
+    // const handleKeyPress = (event) => {
+    //     if(event.key === 'Enter'){
+    //         passwordState.isButtonDisabled || handleSignIn()
+    //     }
+    // }
+
+
+    const validateEmail = emailState => typeof emailState === 'string' && validEmail(true)
+    const validatePassword = passwordState => typeof passwordState === 'string' && validPassword(true)
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+
+    useEffect(() => {
+        setIsButtonDisabled(!validateEmail(emailState))
+    })
 
 
     return (
@@ -109,7 +147,7 @@ function SignInCard() {
                 <input className={styles.surnameInput} type='text' placeholder='surname..' onChange={handleSurnameChange} />
                 <input className={styles.emailInput} type='email' placeholder='email..' onChange={handleEmailChange} />
                 <input required minLength={8} title="Password must contain one number, one uppercase and lowercase letter & at least 8  characters" className={styles.passwordInput} type='password' placeholder='password..' onChange={handlePasswordChange} />
-                <button type='button' onClick={handleSignIn} >Sign In</button>
+                <Link to='/todo' title="redirect"><button type='button' onClick={handleSignIn} disabled={isButtonDisabled}>Sign In</button></Link>
             </div>
         </div>
     )
