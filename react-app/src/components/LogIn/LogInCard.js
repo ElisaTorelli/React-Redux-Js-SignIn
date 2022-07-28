@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from '../LogIn/login.module.css'
-import { checkUserRegistreted, getUser, setIsButtonDisabled, setIsButtonIsabled, setIsError } from '../../redux/login/logInActions'
+import { checkUserRegistreted, getUser, setIsButtonDisabled, setIsButtonIsabled } from '../../redux/login/logInActions'
 
 
 import { Link } from 'react-router-dom'
@@ -14,6 +14,7 @@ const LogInCard = () => {
     const [emailState, setEmailState] = useState('')
     const [passwordState, setPasswordState] = useState('')
     const [errorMessageState, setErrorMessageState] = useState('')
+
 
 
     // React-redux Hooks
@@ -43,6 +44,9 @@ const LogInCard = () => {
         element.password === passwordState
     )
 
+        let errorEmail = () => users.find((e)=> e.email === emailState)
+        let errorPassword = () => users.find((e)=> e.password === passwordState)
+
 
 
     // log-in function
@@ -51,12 +55,14 @@ const LogInCard = () => {
             dispatch(
                 checkUserRegistreted()
             )
-            // bottone = ( <BottoneLogin onClick={this.handleLoginClick} /> )
             console.log('Sei entrato !')
-        }else{
-            dispatch(setIsError())
+        }else if(!errorEmail() && !errorPassword()) {
+            setErrorMessageState('email e password sbagliate!')
             console.log('Non puoi entrare')
-            setErrorMessageState('Credentials not valid')
+        }else if (!errorPassword()){
+            setErrorMessageState('password sbagliata!')
+        }else if(!errorEmail()){
+            setErrorMessageState('email sbagliata!')
         }
     }
 
