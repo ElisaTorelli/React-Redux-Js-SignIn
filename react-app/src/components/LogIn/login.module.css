@@ -1,0 +1,53 @@
+/* INDEX:
+    1.GENERAL SETTINGS
+    2.MAIN CONTAINER
+        a)InputForm
+
+
+*/
+
+/* GENERAL SETTINGS */
+*{
+    box-sizing: border-box;
+    font-family: sans-serif;
+    font-weight: 200;
+    margin: 0;
+    padding: 0;
+}
+
+/* MAIN CONTAINER */
+.logInCardContainer{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 0 auto;
+}
+
+/* InputForm */
+.inputContainer{
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+h3{
+    margin-top: 70px;
+}
+
+input{
+    border: none;
+    margin: 16px;
+}
+
+button{
+    width: 100px;
+    height: 30px;
+    margin: 30px auto;
+
+}
+button:hover{
+    background-color: rgba(125, 133, 133, 0.516);
+    border: 1px solid rgba(125, 133, 133, 0.516);
+}
