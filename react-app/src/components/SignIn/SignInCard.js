@@ -133,7 +133,7 @@ function SignInCard() {
 
     const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
-    const validateEmail = emailState => typeof emailState === 'string' && validEmail(true)
+    const validateEmail = emailState => typeof emailState === 'string' && emailState.includes('.com') 
     // const validatePassword = passwordState => typeof passwordState === 'string' && validPassword(true)
 
 
