@@ -4,6 +4,7 @@ import { getUser, setIsButtonIsAbled, setUser, setIsButtonDisabled } from '../..
 import styles from '../SignIn/signin.module.css'
 
 import {Link} from 'react-router-dom'
+import ToDo from '../../pages/ToDo'
 
 
 
@@ -14,7 +15,7 @@ function SignInCard() {
     const [surnameState, setSurnameState] = useState('')
     const [emailState, setEmailState] = useState('')
     const [passwordState, setPasswordState] = useState('')
-    // const [errorMessageState, setErrorMessageState] = useState('')
+    const [errorMessageState, setErrorMessageState] = useState('')
 
 
 
@@ -63,6 +64,8 @@ function SignInCard() {
         }
     }
 
+
+    
     const handlePasswordChange = (event) =>{
         if(!validPassword(event.target.value)){
             console.log('password NO')
@@ -97,6 +100,7 @@ function SignInCard() {
     const handleSignIn = () => {
         // check if 'userIsPresentInArray' is true / false
         if(!userIsPresentInArray()){
+            // dispatch action and create new user
             dispatch( setUser({
                     name: nameState,
                     surname: surnameState,
@@ -113,9 +117,11 @@ function SignInCard() {
             //     }
             // }
             )
+            console.log(users)
         }
-        console.log(users)
-        // setErrorMessageState('Email not valid')
+        // else{
+        //     setErrorMessageState('Email not valid')
+        // }
     }
 
 
@@ -150,7 +156,6 @@ function SignInCard() {
 
 
 
-
     return (
         <div className={styles.signInCardContainer}>
             <h3>Insert your credentials to sign-in:</h3>
@@ -162,7 +167,7 @@ function SignInCard() {
                 {/* {handleSignIn && (
                     <p className={styles.errorMessage}>{errorMessageState}</p>
                 )} */}
-                <Link to='/todo' title="redirect"><button type='button' onClick={ handleSignIn } disabled={button}>Sign In</button></Link>
+                <Link to='/todo' title="redirect"><button type='button' onClick={ (handleSignIn) } disabled={button}>Sign In</button></Link>
             </div>
         </div>
     )
