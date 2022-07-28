@@ -81,7 +81,7 @@ const LogInCard = () => {
             <div className={styles.inputContainer}>
                 <input className={styles.emailInput} type='email' placeholder='email..' onKeyPress={handleKeyPress} onChange={handleEmailChange} />
                 <input required minLength={8} title="Password must contain one number, one uppercase and lowercase letter & at least 8  characters" onKeyPress={handleKeyPress} className={styles.passwordInput} type='password' placeholder='password..' onChange={handlePasswordChange} />
-                <button type='button' onClick={handleLogIn} disabled={button}>Log In</button>
+                <Link to='/todo' title="redirect"><button type='button' onClick={handleLogIn} disabled={button}>Log In</button></Link>
             </div>
         </div>
     )

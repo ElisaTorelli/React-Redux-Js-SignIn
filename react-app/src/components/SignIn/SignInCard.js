@@ -130,9 +130,12 @@ function SignInCard() {
     // }
 
 
-    const validateEmail = emailState => typeof emailState === 'string' && validEmail(true)
-    const validatePassword = passwordState => typeof passwordState === 'string' && validPassword(true)
+
     const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+
+    const validateEmail = emailState => typeof emailState === 'string' && validEmail(true)
+    // const validatePassword = passwordState => typeof passwordState === 'string' && validPassword(true)
+
 
     useEffect(() => {
         setIsButtonDisabled(!validateEmail(emailState))
