@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getUser, setIsButtonIsAbled, setUser, setIsButtonDisabled } from '../../redux/signin/signInActions'
 import styles from '../SignIn/signin.module.css'
 
-
 import {Link} from 'react-router-dom'
 
 
@@ -15,6 +14,9 @@ function SignInCard() {
     const [surnameState, setSurnameState] = useState('')
     const [emailState, setEmailState] = useState('')
     const [passwordState, setPasswordState] = useState('')
+    // const [errorMessageState, setErrorMessageState] = useState('')
+
+
 
     // React-Redux Hooks
     const users = useSelector(store => store.signin.users)
@@ -71,6 +73,18 @@ function SignInCard() {
     }
 
 
+    // function to set error message
+    // useEffect ((e) => {
+    //     if(!validPassword(e.target.value)){
+    //         setErrorState('Password sbagliata!')
+    //     }else if(!validEmail(e.target.value)){
+    //         setErrorState('Email sbagliata!')
+    //     }
+    // }, [])
+
+
+
+
     // set condition to check if user is in array
     let userIsPresentInArray = () => users.find(
         (element) => 
@@ -101,6 +115,7 @@ function SignInCard() {
             )
         }
         console.log(users)
+        // setErrorMessageState('Email not valid')
     }
 
 
@@ -108,16 +123,10 @@ function SignInCard() {
     useEffect (()=>{
         dispatch(getUser())
     },[])
-    
-
-    /*useEffect(()=>{
-        console.log(users)
-    },[users])*/
 
 
 
     //make btn available after validations
-
     const handleKeyPress = (event) => {
         if(event.key === 'Enter'){
             button || handleSignIn()
@@ -125,16 +134,35 @@ function SignInCard() {
     }
 
 
+    // function to dispatch error action
+    // const dispatchError = () => {
+    //     dispatch(
+    //         setIsError(errorState)
+    //     )
+    //     console.log(errorState)
+    // }
+
+
+    //function to display error message
+    // const displayErrorMessage = () => {
+    //     setErrorMessageState('Email not valid');
+    // } 
+
+
+
 
     return (
         <div className={styles.signInCardContainer}>
             <h3>Insert your credentials to sign-in:</h3>
             <div className={styles.inputContainer}>
-                <input className={styles.nameInput} type='text' placeholder='name..' onChange={handleNameChange} onKeyPress={handleKeyPress}/>
-                <input className={styles.surnameInput} type='text' placeholder='surname..' onChange={handleSurnameChange} onKeyPress={handleKeyPress} />
+                <input className={styles.nameInput} required maxLength={12} type='text' placeholder='name..' onChange={handleNameChange} onKeyPress={handleKeyPress}/>
+                <input className={styles.surnameInput} required maxLength={12} type='text' placeholder='surname..' onChange={handleSurnameChange} onKeyPress={handleKeyPress} />
                 <input className={styles.emailInput} type='email' placeholder='email..' onChange={handleEmailChange} onKeyPress={handleKeyPress}/>
                 <input required minLength={8} title="Password must contain one number, one uppercase and lowercase letter & at least 8  characters" className={styles.passwordInput} type='password' placeholder='password..' onChange={handlePasswordChange} onKeyPress={handleKeyPress} />
-                <Link to='/todo' title="redirect"><button type='button' onClick={handleSignIn} disabled={button}>Sign In</button></Link>
+                {/* {handleSignIn && (
+                    <p className={styles.errorMessage}>{errorMessageState}</p>
+                )} */}
+                <Link to='/todo' title="redirect"><button type='button' onClick={ handleSignIn } disabled={button}>Sign In</button></Link>
             </div>
         </div>
     )
