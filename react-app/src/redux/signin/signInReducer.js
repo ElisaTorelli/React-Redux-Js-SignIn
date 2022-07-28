@@ -1,10 +1,11 @@
-import { GET_USERS, SET_USER, SET_IS_BUTTON_DISABLED} from "./signInTypes"
+import { GET_USERS, SET_USER, SET_IS_BUTTON_DISABLED, SET_IS_BUTTON_IS_ABLED} from "./signInTypes"
 
 
 // set initial state
 const initialState = {
     users: [],
-    isButtonDisabled: true
+    isButtonDisabled: true,
+    isButtunIsAbled:false
 }
 
 
@@ -26,6 +27,11 @@ const signInReducer = (state = initialState, action) => {
             return{
                 ...state,
                 isButtonDisabled: action.payload
+            }
+        case SET_IS_BUTTON_IS_ABLED:
+            return{
+                ...state,
+                isButtonIsabled: action.payload
             }
         default: return state
     }
