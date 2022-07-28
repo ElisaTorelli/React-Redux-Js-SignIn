@@ -37,29 +37,26 @@ const LogInCard = () => {
 
 
     // set condition to check if user is in array
-    let checkLoginUsers = () => {users.find(
+    let checkLoginUsers = () => users.find(
         (element) => 
         element.email === emailState && 
         element.password === passwordState
     )
-}
+
 
 
     // log-in function
     const handleLogIn = () => {
         if(checkLoginUsers()){
             dispatch(
-                checkUserRegistreted(),
+                checkUserRegistreted()
             )
             // bottone = ( <BottoneLogin onClick={this.handleLoginClick} /> )
             console.log('Sei entrato !')
-            alert('OK')
-            // return{}
         }else{
             dispatch(setIsError())
-            setErrorMessageState('email sbagliata!')
             console.log('Non puoi entrare')
-            setErrorMessageState('Email not valid')
+            setErrorMessageState('Credentials not valid')
         }
     }
 
