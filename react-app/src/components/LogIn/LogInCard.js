@@ -5,6 +5,7 @@ import { checkUserRegistreted, getUser, setIsButtonDisabled, setIsButtonIsabled,
 
 
 import { Link } from 'react-router-dom'
+import ToDo from '../../pages/ToDo'
 
 
 
@@ -34,6 +35,7 @@ const LogInCard = () => {
     }
 
 
+
     // set condition to check if user is in array
     let checkLoginUsers = () => {users.find(
         (element) => 
@@ -45,19 +47,22 @@ const LogInCard = () => {
 
     // log-in function
     const handleLogIn = () => {
-
         if(checkLoginUsers()){
             dispatch(
                 checkUserRegistreted(),
             )
             // bottone = ( <BottoneLogin onClick={this.handleLoginClick} /> )
             console.log('Sei entrato !')
+            alert('OK')
+            // return{}
         }else{
             dispatch(setIsError())
             setErrorMessageState('email sbagliata!')
             console.log('Non puoi entrare')
+            setErrorMessageState('Email not valid')
         }
     }
+
 
 
     // disabled button 
