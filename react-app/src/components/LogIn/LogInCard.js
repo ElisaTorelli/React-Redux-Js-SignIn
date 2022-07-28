@@ -12,6 +12,8 @@ const LogInCard = () => {
     // set field's state
     const [emailState, setEmailState] = useState('')
     const [passwordState, setPasswordState] = useState('')
+    const [errorMessageState, setErrorMessageState] = useState('')
+
 
     // React-redux Hooks
     const users = useSelector((state) => state.login.users)
@@ -51,7 +53,9 @@ const LogInCard = () => {
         }else{
             console.log('Non puoi entrare')
         }
+        setErrorMessageState('Email not valid')
     }
+
 
     // disabled button 
     useEffect(() => {
@@ -62,11 +66,15 @@ const LogInCard = () => {
         }
         }, [emailState, passwordState]);
 
+
+
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
             button || handleLogIn();
             }
         };
+
+
 
     // send getUser action --> it select users array & push it in [users]
     useEffect (()=>{
@@ -81,7 +89,12 @@ const LogInCard = () => {
             <div className={styles.inputContainer}>
                 <input className={styles.emailInput} type='email' placeholder='email..' onKeyPress={handleKeyPress} onChange={handleEmailChange} />
                 <input required minLength={8} title="Password must contain one number, one uppercase and lowercase letter & at least 8  characters" onKeyPress={handleKeyPress} className={styles.passwordInput} type='password' placeholder='password..' onChange={handlePasswordChange} />
-                <Link to='/todo' title="redirect"><button type='button' onClick={handleLogIn} disabled={button}>Log In</button></Link>
+                {handleLogIn && (
+                    <p className={styles.errorMessage}>{errorMessageState}</p>
+                )}
+                {/* <Link to='/todo' title="redirect"> */}
+                <button type='button' onClick={handleLogIn} disabled={button}>Log In</button>
+                {/* </Link> */}
             </div>
         </div>
     )
