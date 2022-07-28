@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUser, setUser } from '../../redux/signin/signInActions'
+import { getUser, setIsButtonIsAbled, setUser, setIsButtonDisabled } from '../../redux/signin/signInActions'
 import styles from '../SignIn/signin.module.css'
 
 
 import {Link} from 'react-router-dom'
-import { SET_IS_BUTTON_DISABLED } from '../../redux/signin/signInTypes'
 
 
 
@@ -19,23 +18,18 @@ function SignInCard() {
 
     // React-Redux Hooks
     const users = useSelector(store => store.signin.users)
+    const button= useSelector((state)=> state.signin.isButtonDisabled)
     const dispatch = useDispatch()
 
 
     // disable SignIn btn
-    // useEffect(() => {
-    //     if(nameState?.trim() && surnameState?.trim() && emailState.trim() && passwordState.trim()){
-    //         dispatch({
-    //             type: SET_IS_BUTTON_DISABLED,
-    //             payload: false
-    //         })
-    //     }else{
-    //         dispatch({
-    //             type: SET_IS_BUTTON_DISABLED,
-    //             payload: true
-    //         })
-    //     }
-    // }, [emailState, passwordState])
+    useEffect(() => {
+        if(nameState?.trim() && surnameState?.trim() && emailState.trim() && passwordState.trim()){
+            dispatch(setIsButtonDisabled())
+        }else{
+            dispatch(setIsButtonIsAbled())
+        }
+    }, [emailState, passwordState])
 
 
     // check if email & password are valid
@@ -123,34 +117,24 @@ function SignInCard() {
 
 
     //make btn available after validations
-    // const handleKeyPress = (event) => {
-    //     if(event.key === 'Enter'){
-    //         passwordState.isButtonDisabled || handleSignIn()
-    //     }
-    // }
 
+    const handleKeyPress = (event) => {
+        if(event.key === 'Enter'){
+            button || handleSignIn()
+        }
+    }
 
-
-    const [isButtonDisabled, setIsButtonDisabled] = useState(true)
-
-    const validateEmail = emailState => typeof emailState === 'string' && emailState.includes('.com') 
-    // const validatePassword = passwordState => typeof passwordState === 'string' && validPassword(true)
-
-
-    useEffect(() => {
-        setIsButtonDisabled(!validateEmail(emailState))
-    })
 
 
     return (
         <div className={styles.signInCardContainer}>
             <h3>Insert your credentials to sign-in:</h3>
             <div className={styles.inputContainer}>
-                <input className={styles.nameInput} type='text' placeholder='name..' onChange={handleNameChange} />
-                <input className={styles.surnameInput} type='text' placeholder='surname..' onChange={handleSurnameChange} />
-                <input className={styles.emailInput} type='email' placeholder='email..' onChange={handleEmailChange} />
-                <input required minLength={8} title="Password must contain one number, one uppercase and lowercase letter & at least 8  characters" className={styles.passwordInput} type='password' placeholder='password..' onChange={handlePasswordChange} />
-                <Link to='/todo' title="redirect"><button type='button' onClick={handleSignIn} disabled={isButtonDisabled}>Sign In</button></Link>
+                <input className={styles.nameInput} type='text' placeholder='name..' onChange={handleNameChange} onKeyPress={handleKeyPress}/>
+                <input className={styles.surnameInput} type='text' placeholder='surname..' onChange={handleSurnameChange} onKeyPress={handleKeyPress} />
+                <input className={styles.emailInput} type='email' placeholder='email..' onChange={handleEmailChange} onKeyPress={handleKeyPress}/>
+                <input required minLength={8} title="Password must contain one number, one uppercase and lowercase letter & at least 8  characters" className={styles.passwordInput} type='password' placeholder='password..' onChange={handlePasswordChange} onKeyPress={handleKeyPress} />
+                <Link to='/todo' title="redirect"><button type='button' onClick={handleSignIn} disabled={button}>Sign In</button></Link>
             </div>
         </div>
     )
