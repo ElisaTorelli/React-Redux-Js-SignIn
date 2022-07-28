@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from '../LogIn/login.module.css'
 import { checkUserRegistreted, getUser, setIsButtonDisabled, setIsButtonIsabled } from '../../redux/login/logInActions'
-
-
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import ToDo from '../../pages/ToDo'
 
 
@@ -21,6 +19,7 @@ const LogInCard = () => {
     const users = useSelector((state) => state.login.users)
     const button= useSelector((state)=> state.login.isButtonDisabled)
     const dispatch = useDispatch()
+    const navigate = useNavigate();
 
 
 
@@ -48,7 +47,6 @@ const LogInCard = () => {
         let errorPassword = () => users.find((e)=> e.password === passwordState)
 
 
-
     // log-in function
     const handleLogIn = () => {
         if(checkLoginUsers()){
@@ -56,6 +54,7 @@ const LogInCard = () => {
                 checkUserRegistreted()
             )
             console.log('Sei entrato !')
+            navigate('/todo')
         }else if(!errorEmail() && !errorPassword()) {
             setErrorMessageState('email e password sbagliate!')
             console.log('Non puoi entrare')
