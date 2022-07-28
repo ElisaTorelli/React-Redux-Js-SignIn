@@ -1,4 +1,6 @@
-import {GET_USERS, CHECK_USER_REGISTRETED, SET_IS_BUTTON_DISABLED, SET_IS_BUTTON_IS_ABLED, ERROR_MESSAGE} from './logInTypes'
+
+import {GET_USERS, CHECK_USER_REGISTRETED, SET_IS_BUTTON_DISABLED, SET_IS_BUTTON_IS_ABLED, SET_IS_ERROR} from './logInTypes'
+
 
 
 //  create initial state
@@ -6,7 +8,8 @@ const initialState = {
     users: [],
     check:false,
     isButtonDisabled:true,
-    isButtunIsAbled:false
+    isButtunIsAbled:false,
+    isError: false,
 }
 
 
@@ -33,6 +36,12 @@ const logInReducer = (state = initialState, action) => {
                 ...state,
                 // push usersArray in [users]
                 users: [...action.payload],
+            }
+        case SET_IS_ERROR:
+            return{
+                ...state,
+                // push usersArray in [users]
+                isError: action.payload,
             }
         default: return state
     }
