@@ -19,6 +19,8 @@
 .signInCardContainer{
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
+    width: 50%;
 }
 
 /* InputForm */
@@ -26,7 +28,6 @@
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    width: 20%;
     margin: 0 auto;
     margin-top: 40px;
 }
@@ -43,8 +44,8 @@ input{
 button{
     width: 100px;
     height: 30px;
-    margin-top: 30px;
-    margin-left: 70px;
+    margin: 30px auto;
+
 }
 button:hover{
     background-color: rgba(125, 133, 133, 0.516);

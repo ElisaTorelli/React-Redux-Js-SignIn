@@ -1,9 +1,10 @@
 import {GET_USERS, CHECK_USER_REGISTRETED} from './logInTypes'
 
 
-
+//  create initial state
 const initialState = {
-    users: []
+    users: [],
+    check:false
 }
 
 
@@ -11,14 +12,15 @@ const logInReducer = (state = initialState, action) => {
     switch(action.type){
         case CHECK_USER_REGISTRETED:
             return{
+                // set check true
                 ...state,
-                users: state.users.includes(action.user)
+                check: action.payload
             }
         case GET_USERS:
             return{
                 ...state,
                 // push usersArray in [users]
-                users: [...state.users, ...action.payload],
+                users: [...action.payload],
             }
         default: return state
     }

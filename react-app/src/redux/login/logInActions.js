@@ -3,10 +3,10 @@ import usersArray from '../usersArray'
 
 
 
-export const checkUserRegistreted = (user = {}) => {
+export const checkUserRegistreted = () => {
     return{
         type: CHECK_USER_REGISTRETED,
-        payload: user
+        payload: true
     }
 }
 

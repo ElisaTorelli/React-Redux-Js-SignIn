@@ -10,11 +10,12 @@ const LogInCard = () => {
     const [passwordState, setPasswordState] = useState('')
 
     // React-redux Hooks
-    // const usersLogin = useSelector((state) => state.users)
+    const users = useSelector((state) => state.login.users)
     const dispatch = useDispatch()
 
 
 
+    //functions to change initial value state for each input form
     const handleEmailChange = (event) =>{
         setEmailState(event?.target?.value)
         console.log('ok email')
@@ -26,25 +27,24 @@ const LogInCard = () => {
     }
 
 
-    // let checkLoginUsers = usersLogin.find(
-    //     (element) => 
-    //     element.email === emailState && 
-    //     element.password === passwordState
-    // )
-    // console.log(usersLogin)
+    // set condition to check if user is in array
+    let checkLoginUsers = () => users.find(
+        (element) => 
+        element.email === emailState && 
+        element.password === passwordState
+    )
 
 
+    // log-in function
     const handleLogIn = () => {
-        // if(checkLoginUsers){
+        if(checkLoginUsers()){
             dispatch(
-                checkUserRegistreted({
-                    email: emailState,
-                    password: passwordState
-                })
+                checkUserRegistreted()
             )
-        // }else{
-        //     console.log('Non puoi entrare')
-        // }
+            console.log('Sei entrato !')
+        }else{
+            console.log('Non puoi entrare')
+        }
     }
 
 
@@ -56,7 +56,7 @@ const LogInCard = () => {
 
 
     return (
-        <div className={styles.signInCardContainer}>
+        <div className={styles.logInCardContainer}>
             <h3>Insert your credentials to log-in:</h3>
             <div className={styles.inputContainer}>
                 <input className={styles.emailInput} type='email' placeholder='email..' onChange={handleEmailChange} />
